@@ -1,4 +1,4 @@
-require([
+define([
 	"libs/mustache/mustache.min.js",
 	"text!./BackboneGridRowTemplate.html",
 	"text!./BackboneGridTemplate.html"
