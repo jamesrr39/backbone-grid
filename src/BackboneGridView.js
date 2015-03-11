@@ -1,7 +1,7 @@
-define([
+require([
 	"libs/mustache/mustache.min.js",
-	"text!backboneGrid/BackboneGridRowTemplate.html",
-	"text!backboneGrid/BackboneGridTemplate.html"
+	"text!./BackboneGridRowTemplate.html",
+	"text!./BackboneGridTemplate.html"
 ], function(Mustache, BackboneGridRowTemplate, BackboneGridTemplate) {
 	"use strict";
 	return Backbone.View.extend({
