@@ -8,7 +8,6 @@ define([
 		gridTemplate: BackboneGridTemplate,
 		rowTemplate: BackboneGridRowTemplate,
 		events: {
-			"keyup .filter": "filter",
 			"click [data-bgv-action='archive']": "archive"
 		},
 		defaults: function(){
@@ -64,23 +63,6 @@ define([
 		archive: function(event){
 			var modelId = $(event.target).closest("tr").attr("data-id");
 			this.collection.get(modelId).set("archived", true);
-		},
-		filter: function() {
-			var self = this,
-					filterTerm = this.$(".filter").val().toLowerCase();
-			if (filterTerm === "") {
-				$("tr[data-id]").removeClass("hidden");
-				return;
-			}
-			this.collection.each(function(model) {
-				var containsURL = model.get("url").toLowerCase().indexOf(filterTerm) > -1,
-						containsTitle = model.get("title").toLowerCase().indexOf(filterTerm) > -1;
-				if (containsURL || containsTitle) {
-					self.$("tr[data-id='" + model.id + "']").removeClass("hidden");
-				} else {
-					self.$("tr[data-id='" + model.id + "']").addClass("hidden");
-				}
-			});
 		}
 	});
 });
