@@ -1,9 +1,10 @@
 define([
-	"libs/mustache/mustache.min.js",
+	"./libs/mustache/mustache.min.js",
 	"text!./BackboneGridRowTemplate.html",
 	"text!./BackboneGridTemplate.html"
 ], function(Mustache, BackboneGridRowTemplate, BackboneGridTemplate) {
 	"use strict";
+
 	return Backbone.View.extend({
 		gridTemplate: BackboneGridTemplate,
 		rowTemplate: BackboneGridRowTemplate,

@@ -1,0 +1,28 @@
+{
+  "name": "backbone-grid",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jamesrr39/backbone-grid",
+  "authors": [
+    "jr39.dev@gmail.com"
+  ],
+  "description": "grid using a backbone collection",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "backbone",
+    "grid"
+  ],
+  "license": "Apache 2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mustache": "~1.1.0"
+  }
+}
