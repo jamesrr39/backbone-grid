@@ -1,69 +1,85 @@
 define([
-	"./libs/mustache/mustache.min.js",
+	"./libs/mustache/mustache",
 	"text!./BackboneGridRowTemplate.html",
 	"text!./BackboneGridTemplate.html"
 ], function(Mustache, BackboneGridRowTemplate, BackboneGridTemplate) {
 	"use strict";
 
-	return Backbone.View.extend({
-		gridTemplate: BackboneGridTemplate,
-		rowTemplate: BackboneGridRowTemplate,
-		events: {
-			"click [data-bgv-action='archive']": "archive"
-		},
-		defaults: function(){
-			var self = this;
+	return function(element, collection, columns, options) {
 
-			return {
-				sortBy: function(){
-					return self.collection.sortBy(self.collection.model.idAttribute);
-				},
-				getModelData: function(model){
-					return _.extend(model.toJSON(), {
-						id: model.id
-					});
-				}
-			};
-		},
-		initialize: function(options) {
-			options = options || {};
-			this.options = _.extend(this.defaults(), options);
-			this.getHeadings = _.isFunction(options.getHeadings) ? options.getHeadings : this.getHeadings;
-			this.getData = _.isFunction(options.getData) ? options.getData : this.getData;
-			this.rowTemplate = options.rowTemplate ? options.rowTemplate : this.rowTemplate;
-			this.allowDelete = options.allowDelete ? options.allowDelete : this.allowDelete;
-
-			this.collection.on("add", function(model) {
-				this.renderRows();
-			}, this);
-			this.collection.on("remove", function(model) {
-				this.removeRow(model.id);
-			}, this);
-		},
-		render: function() {
-			var self = this;
-			this.$el.html(Mustache.render(this.gridTemplate, {
-				headings: self.getHeadings()
+		var render = function() {
+			$(element).html(Mustache.render(options.gridTemplate, {
+				headings: options.getHeadings()
 			}));
-			this.renderRows();
+			renderRows();
 		},
-		renderRows: function(){
-			var self = this,
-					html = [];
-			_.each(this.getData(this.collection), function(data){
-				html.push(self.getRowHtml(data));
-			});
-			this.$("tbody").html(html.join(""));
+		generateRowHtml = function(data) {
+			return Mustache.render(options.rowTemplate, data);
 		},
-		getRowHtml: function(data) {
-			return Mustache.render(this.rowTemplate, data);
+		removeRow = function(id) {
+			$(element).find("tr[data-id='" + id + "']").remove();
 		},
-		removeRow: function(id) {
-			this.$("tr[data-id='" + id + "']").remove();
-		},
-		archive: function(event){
-			var modelId = $(event.target).closest("tr").attr("data-id");
-			this.collection.get(modelId).set("archived", true);
-		}
-	});
+		renderRows = function() {
+			var html,
+				records = collection.filter(function(model){
+					return true;
+				})
+				.sort(options.sortBy);
+			html = _.map(records, function(model) {
+				return generateRowHtml({
+					id: model.id,
+					data: _.map(columns, function(column){
+						return model.get(column.key);
+					})
+				});
+			}).join("");
+			$(element).find("tbody").html(html);
+		};
+
+
+		options = _.extend({
+			gridTemplate: BackboneGridTemplate,
+			rowTemplate: BackboneGridRowTemplate,
+			/**
+			 * 
+			 * @param {Backbone.Model} a
+			 * @param {Backbone.Model} b
+			 * @returns {Number}
+			 */
+			sortBy: function(a, b) {
+				if(a.get(a.id) < b.get(b.id)){
+					return -1;
+				} else if(a > b){
+					return 1;
+				}
+				return 0;
+			},
+			filter: function(model) {
+				return true;
+			},
+			/**
+			 * Get the column titles
+			 * By default take the field from the first model, or take an empty array if no first field
+			 * @returns {Array}
+			 */
+			getHeadings: function() {
+				return _.pluck(columns, "name");
+			},
+			getData: function() {
+				return collection.toJSON();
+			}
+		}, options);
+
+		collection.on("add", function(model) {
+			renderRows();
+		}, this);
+		collection.on("remove", function(model) {
+			removeRow(model.id);
+		}, this);
+
+		return {
+			render: render
+		};
+	};
+
 });

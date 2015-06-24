@@ -1,1 +1,4 @@
 /src/libs
+/nbproject
+/node_modules
+*~
