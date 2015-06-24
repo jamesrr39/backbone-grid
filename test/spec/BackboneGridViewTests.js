@@ -147,5 +147,44 @@ define([
 			
 		});
 	});
+	
+	describe("adding a record", function(){
+		it("should automatically add it to the grid", function(){
+			var  columns = [{
+					key: "id",
+					name: "ID"
+				}, {
+					key: "name",
+					name: "Name"
+				}],
+				collection = new Backbone.Collection([{
+						id: 2,
+						name: "aa"
+					},{
+						id: 3,
+						name: "cc"
+					},{
+						id: 4,
+						name: "bb"
+					}], {
+						model: Backbone.Model.extend({
+							idAttribute: "id"
+						})
+					});
+			var gridView = new BackboneGridView($container, collection, columns);
+			gridView.render();
+			expect($("tbody tr").length).toBe(3);
+			
+			// remove #2 from collection
+			collection.add({
+				id: 5,
+				name: "new"
+			});
+			expect($("tbody tr").length).toBe(4);
+			expect($("tbody tr[data-id='5']").length).toBe(1);
+			
+		});
+	});
+	
 
 });
