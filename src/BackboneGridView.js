@@ -30,10 +30,7 @@ define([
 		},
 		renderRows = function() {
 			var html,
-				records = collection.filter(function(model){
-					return true;
-				})
-				.sort(options.sortBy);
+				records = collection.filter(options.filter).sort(options.sortBy);
 			html = _.map(records, function(model) {
 				return generateRowHtml({
 					id: model.id,

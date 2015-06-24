@@ -41,7 +41,7 @@ define([
 	});
 	
 	describe("sorting", function(){
-		it("should filter by name descending", function(){
+		it("should sort by name descending", function(){
 			var  columns = [{
 					key: "id",
 					name: "ID"
@@ -73,6 +73,42 @@ define([
 			expect($("tbody tr:eq(0)").attr("data-id")).toBe("3");
 			expect($("tbody tr:eq(1)").attr("data-id")).toBe("4");
 			expect($("tbody tr:eq(2)").attr("data-id")).toBe("2");
+		});
+	});
+	
+	describe("filtering", function(){
+		it("should filter out names starting with a", function(){
+			var  columns = [{
+					key: "id",
+					name: "ID"
+				}, {
+					key: "name",
+					name: "Name"
+				}],
+				collection = new Backbone.Collection([{
+						id: 2,
+						name: "aa"
+					},{
+						id: 3,
+						name: "cc"
+					},{
+						id: 4,
+						name: "bb"
+					}], {
+						model: Backbone.Model.extend({
+							idAttribute: "id"
+						})
+					});
+			var gridView = new BackboneGridView($container, collection, columns, {
+				filter: function(model){
+					return (0 !== model.get("name").indexOf("a"));
+				}
+			});
+			gridView.render();
+			expect($("tbody tr").length).toBe(2);
+			expect($("tbody tr[data-id='2']").length).toBe(0);
+			expect($("tbody tr[data-id='3']").length).toBe(1);
+			expect($("tbody tr[data-id='4']").length).toBe(1);
 		});
 	});
 
