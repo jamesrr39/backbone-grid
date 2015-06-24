@@ -5,6 +5,15 @@ define([
 ], function(Mustache, BackboneGridRowTemplate, BackboneGridTemplate) {
 	"use strict";
 
+	/**
+	 * 
+	 * @param {HTMLElement} element grid container
+	 * @param {Backbone.Collection} collection
+	 * @param {array} columns list of columns in the order they should be shown. Should be a list of objects with the keys: <code>key</code> (field in the backbone models) and <code>name</code> presentation name
+	 * @param {object} options extra options. See <code>_.extend(options, {...})</code> further down for a list of options and defaults.
+	 * @example see /examples folder
+	 * @returns {object} instantiated BackboneGridView
+	 */
 	return function(element, collection, columns, options) {
 
 		var render = function() {
@@ -41,10 +50,10 @@ define([
 			gridTemplate: BackboneGridTemplate,
 			rowTemplate: BackboneGridRowTemplate,
 			/**
-			 * 
+			 * for sorting
 			 * @param {Backbone.Model} a
 			 * @param {Backbone.Model} b
-			 * @returns {Number}
+			 * @returns {Number} 0 if equal, -1 if a should be shown before b, 1 if b should be shown before a
 			 */
 			sortBy: function(a, b) {
 				if(a.get(a.id) < b.get(b.id)){
@@ -54,6 +63,11 @@ define([
 				}
 				return 0;
 			},
+			/**
+			 * 
+			 * @param {Backbone.Model} model
+			 * @returns {Boolean} true if it should be shown, false if it should be hidden
+			 */
 			filter: function(model) {
 				return true;
 			},
