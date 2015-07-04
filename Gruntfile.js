@@ -42,9 +42,13 @@ module.exports = function(grunt) {
 					]
 				}
 			}
+		},
+		bower: {
+			install: {}
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
