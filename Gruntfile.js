@@ -1,4 +1,13 @@
 module.exports = function(grunt) {
+	
+	var requireConfig = {
+		baseUrl: 'src/',
+		paths: {
+			"text": "libs/requirejs-text/text",
+			'jquery': 'libs/jquery/dist/jquery',
+			"underscore": "libs/underscore/underscore"
+		}
+	};
 		
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -11,8 +20,10 @@ module.exports = function(grunt) {
 		requirejs: {
 			compile: {
 				options: {
-					baseUrl: "src/",
-					out: "dist/optimized.js"
+					baseUrl: requireConfig.baseUrl,
+					paths: requireConfig.paths,
+					out: "dist/optimized.js",
+					name: "BackboneGridView",
 				}
 			}
 		},
@@ -23,14 +34,7 @@ module.exports = function(grunt) {
 					helpers: 'test/helpers/**/*.js',
 					template: require('grunt-template-jasmine-requirejs'),
 					templateOptions: {
-						requireConfig: {
-							baseUrl: 'src/',
-							paths: {
-								"text": "libs/requirejs-text/text",
-								'jquery': 'libs/jquery/dist/jquery',
-								"underscore": "libs/underscore/underscore"
-							}
-						}
+						requireConfig: requireConfig
 					},
 					vendor: [
 						"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js",
