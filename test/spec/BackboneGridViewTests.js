@@ -1,24 +1,22 @@
 define([
 	"BackboneGridView",
-	"libs/backbone/backbone",
+	"libs/backbone/backbone"
 ], function(BackboneGridView, Backbone) {
 
 	var $container;
 
 	beforeEach(function() {
-		$container = $('<div class="content">');
-		$(document.body).append($container);
+		$container = $(document.createElement("div"));
 	});
 
 	afterEach(function() {
 		$container.remove();
-		$container = null;
 	});
 
 
-	describe("false", function() {
-		it("should be equal to false", function() {
-			expect(false).toBe(false);
+	describe("element", function() {
+		it("should exist", function() {
+			expect($container.length).toBe(1);
 		});
 	});
 
@@ -36,7 +34,7 @@ define([
 						name: "my row"
 					}]), columns);
 				gridView.render();
-			expect($("tbody tr").length).toBe(1);
+			expect($container.find("tbody tr").length).toBe(1);
 		});
 	});
 	
@@ -69,10 +67,10 @@ define([
 				}
 			});
 			gridView.render();
-			expect($("tbody tr").length).toBe(3);
-			expect($("tbody tr:eq(0)").attr("data-id")).toBe("3");
-			expect($("tbody tr:eq(1)").attr("data-id")).toBe("4");
-			expect($("tbody tr:eq(2)").attr("data-id")).toBe("2");
+			expect($container.find("tbody tr").length).toBe(3);
+			expect($container.find("tbody tr:eq(0)").attr("data-id")).toBe("3");
+			expect($container.find("tbody tr:eq(1)").attr("data-id")).toBe("4");
+			expect($container.find("tbody tr:eq(2)").attr("data-id")).toBe("2");
 		});
 	});
 	
@@ -105,10 +103,10 @@ define([
 				}
 			});
 			gridView.render();
-			expect($("tbody tr").length).toBe(2);
-			expect($("tbody tr[data-id='2']").length).toBe(0);
-			expect($("tbody tr[data-id='3']").length).toBe(1);
-			expect($("tbody tr[data-id='4']").length).toBe(1);
+			expect($container.find("tbody tr").length).toBe(2);
+			expect($container.find("tbody tr[data-id='2']").length).toBe(0);
+			expect($container.find("tbody tr[data-id='3']").length).toBe(1);
+			expect($container.find("tbody tr[data-id='4']").length).toBe(1);
 		});
 	});
 	
@@ -137,13 +135,13 @@ define([
 					});
 			var gridView = new BackboneGridView($container, collection, columns);
 			gridView.render();
-			expect($("tbody tr").length).toBe(3);
-			expect($("tbody tr[data-id='2']").length).toBe(1);
+			expect($container.find("tbody tr").length).toBe(3);
+			expect($container.find("tbody tr[data-id='2']").length).toBe(1);
 			
 			// remove #2 from collection
 			collection.remove(2);
-			expect($("tbody tr").length).toBe(2);
-			expect($("tbody tr[data-id='2']").length).toBe(0);
+			expect($container.find("tbody tr").length).toBe(2);
+			expect($container.find("tbody tr[data-id='2']").length).toBe(0);
 			
 		});
 	});
@@ -173,18 +171,52 @@ define([
 					});
 			var gridView = new BackboneGridView($container, collection, columns);
 			gridView.render();
-			expect($("tbody tr").length).toBe(3);
+			expect($container.find("tbody tr").length).toBe(3);
 			
 			// remove #2 from collection
 			collection.add({
 				id: 5,
 				name: "new"
 			});
-			expect($("tbody tr").length).toBe(4);
-			expect($("tbody tr[data-id='5']").length).toBe(1);
+			expect($container.find("tbody tr").length).toBe(4);
+			expect($container.find("tbody tr[data-id='5']").length).toBe(1);
 			
 		});
 	});
 	
+	describe("changing a record", function(){
+		it("should automatically change it in the grid", function(){
+			var  columns = [{
+					key: "id",
+					name: "ID"
+				}, {
+					key: "name",
+					name: "Name"
+				}],
+				collection = new Backbone.Collection([{
+						id: 2,
+						name: "aa"
+					},{
+						id: 3,
+						name: "cc"
+					},{
+						id: 4,
+						name: "bb"
+					}], {
+						model: Backbone.Model.extend({
+							idAttribute: "id"
+						})
+					});
+			var gridView = new BackboneGridView($container, collection, columns);
+			gridView.render();
+			expect($container.find("tbody tr").length).toBe(3);
+			
+			// remove #2 from collection
+			collection.get(3).set("name", "new name");
+			expect($container.find("tbody tr").length).toBe(3);
+			expect($container.find("tbody tr[data-id='3'] td:eq(1)").text()).toBe("new name");
+			
+		});
+	});
 
 });

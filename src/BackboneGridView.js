@@ -81,7 +81,7 @@ define([
 			}
 		}, options);
 
-		collection.on("add", function(model) {
+		collection.on("add change", function(model) {
 			renderRows();
 		}, this);
 		collection.on("remove", function(model) {
