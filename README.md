@@ -2,6 +2,10 @@
 Minimal Javascript grid using a backbone collection as its data source.
 Playing around with using grunt/requirejs for testing.
 
+## Build (pull in bower resources, run tests)
+
+    grunt install
+
 ## Test ##
 
     grunt test
@@ -9,3 +13,7 @@ Playing around with using grunt/requirejs for testing.
 ## jshint ##
 
     grunt jshint
+
+## Package for requirejs
+
+    grunt package
