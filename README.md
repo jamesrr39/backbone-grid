@@ -5,7 +5,7 @@ Playing around with using grunt/requirejs for testing.
 ## Requirements
 
 * [npm](https://docs.npmjs.com/getting-started/installing-node)
-* grunt `npm install -g grunt`
+* grunt `npm install -g grunt-cli`
 
 ## Build (pull in 3rd party resources via bower, run tests)
 
