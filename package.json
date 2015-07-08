@@ -10,6 +10,7 @@
     "grunt-bower-task": "~0.4.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "install": "grunt bower:install"
   }
 }
