@@ -2,7 +2,12 @@
 Minimal Javascript grid using a backbone collection as its data source.
 Playing around with using grunt/requirejs for testing.
 
-## Build (pull in bower resources, run tests)
+## Requirements
+
+* [npm](https://docs.npmjs.com/getting-started/installing-node)
+* grunt `npm install -g grunt`
+
+## Build (pull in 3rd party resources via bower, run tests)
 
     grunt install
 
@@ -14,6 +19,6 @@ Playing around with using grunt/requirejs for testing.
 
     grunt jshint
 
-## Package for requirejs
+## Package in a minified file with requirejs
 
     grunt package
