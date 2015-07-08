@@ -1,6 +1,10 @@
 {
   "name": "backbone-grid",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesrr39/backbone-grid"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "^0.11.1",
@@ -10,6 +14,7 @@
     "grunt-bower-task": "~0.4.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "install": "grunt bower:install"
   }
 }

@@ -53,6 +53,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+	grunt.registerTask("install", ["bower:install", "jasmine"])
 	grunt.registerTask("test", ["jasmine"]);
+	grunt.registerTask("package", ["requirejs"])
 };
 
