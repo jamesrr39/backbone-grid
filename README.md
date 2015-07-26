@@ -22,3 +22,10 @@ Playing around with using grunt/requirejs for testing.
 ## Package in a minified file with requirejs
 
     grunt package
+
+## Try out examples at `http://localhost:8080/examples`
+
+    # install http-server package
+    npm install http-server
+    # start http-server
+    node_modules/http-server/bin/http-server ./
