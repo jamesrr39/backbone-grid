@@ -1,0 +1,6 @@
+#grid th{
+  background-color: lightblue;
+}
+#grid .delete{
+  cursor: pointer;
+}

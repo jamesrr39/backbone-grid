@@ -1,5 +1,7 @@
 <tr data-id="{{id}}">
-	{{#data}}
-	<td>{{.}}</td>
-	{{/data}}
+	{{#each data}}
+	<td>
+		{{this}}
+	</td>
+	{{/each}}
 </tr>
