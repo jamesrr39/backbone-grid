@@ -7,6 +7,10 @@ Playing around with using grunt/requirejs for testing.
 * [npm](https://docs.npmjs.com/getting-started/installing-node)
 * grunt `npm install -g grunt-cli`
 
+## Usage
+
+Use it like a normal backbone view; pass it an element, a collection, and pass an array of columns. See the [examples](./examples) for getting started.
+
 ## Build (pull in 3rd party resources via bower, run tests)
 
     grunt install
