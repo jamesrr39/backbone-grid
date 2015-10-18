@@ -3,9 +3,12 @@ module.exports = function(grunt) {
 	var requireConfig = {
 		baseUrl: 'src/',
 		paths: {
-			"text": "libs/requirejs-text/text",
-			'jquery': 'libs/jquery/dist/jquery',
-			"underscore": "libs/underscore/underscore"
+			text: "libs/requirejs-text/text",
+			jquery: 'libs/jquery/dist/jquery',
+			underscore: "libs/underscore/underscore",
+			handlebars: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.amd.min",
+			test: "../test/",
+			backbone: "libs/backbone/backbone"
 		}
 	};
 		
@@ -14,7 +17,10 @@ module.exports = function(grunt) {
 		jshint: {
 			all: [
 				"Gruntfile.js",
-				"src/*.js"
+				"package.json",
+				"src/**/*.js",
+				"!src/libs/**",
+				"test/**/*.js"
 			]
 		},
 		requirejs: {
@@ -53,8 +59,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-	grunt.registerTask("install", ["bower:install", "jasmine"])
+	grunt.registerTask("install", ["bower:install", "jasmine"]);
 	grunt.registerTask("test", ["jasmine"]);
-	grunt.registerTask("package", ["requirejs"])
+	grunt.registerTask("package", ["requirejs"]);
 };
 

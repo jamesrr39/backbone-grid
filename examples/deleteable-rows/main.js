@@ -1,7 +1,8 @@
 define([
+	"handlebars",
 	"../../src/BackboneGridView",
 	"text!./rowTemplate.html"
-], function(BackboneGridView, rowTemplate){
+], function(Handlebars, BackboneGridView, rowTemplate){
 	"use strict";
 
 	var collection = new Backbone.Collection([{
@@ -23,9 +24,9 @@ define([
 	}],
 	GridView = BackboneGridView.extend({
 		events: {
-			"click .delete": "delete"
+			"click .delete": "clickDelete"
 		},
-		delete: function(event){
+		clickDelete: function(event){
 			var id = $(event.currentTarget).closest("tr").attr("data-id");
 			event.preventDefault();
 			collection.remove(id);
@@ -35,7 +36,7 @@ define([
 		el: $("#grid"),
 		collection: collection,
 		columns: columns,
-		rowTemplate: rowTemplate
+		rowTemplate: Handlebars.compile(rowTemplate)
 	});
 	grid.render();
 
