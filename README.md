@@ -29,7 +29,4 @@ Use it like a normal backbone view; pass it an element, a collection, and pass a
 
 ## Try out examples at `http://localhost:8080/examples`
 
-    # install http-server package
-    npm install http-server
-    # start http-server
-    node_modules/http-server/bin/http-server ./
+    npm run-script demo
