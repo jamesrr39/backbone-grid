@@ -16,6 +16,6 @@
 	"scripts": {
 		"test": "grunt test",
 		"install": "grunt bower:install",
-		"demo": "npm install http-server; node_modules/http-server/bin/http-server ./"
+		"demo": "npm install http-server; node_modules/http-server/bin/http-server -c-1 ./"
 	}
 }

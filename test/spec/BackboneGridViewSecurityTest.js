@@ -1,6 +1,6 @@
 define([
 	"BackboneGridView",
-	"libs/backbone/backbone"
+	"backbone"
 ], function(BackboneGridView, Backbone) {
 
 	var $container;
@@ -27,7 +27,7 @@ define([
       collection = new Backbone.Collection([{
         id: vunerableCodeSnippet,
         text: vunerableCodeSnippet
-      }])
+      }]);
       var grid = new BackboneGridView({
         el: $container,
         collection: collection,
@@ -45,8 +45,6 @@ define([
       expect($.trim(grid.$("tbody td")[0].innerText)).toBe(vunerableCodeSnippet);
       expect($.trim(grid.$("tbody td")[1].innerText)).toBe(vunerableCodeSnippet);
 
-    })
-  })
-
-
+    });
+  });
 });

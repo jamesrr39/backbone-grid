@@ -1,6 +1,6 @@
 define([
 	"BackboneGridView",
-	"libs/backbone/backbone"
+	"backbone"
 ], function(BackboneGridView, Backbone) {
 
 	var $container;
