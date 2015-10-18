@@ -11,6 +11,7 @@ define([
 		/**
 		 * Function that takes model data and builds (and returns) an HTML representation of the table row
 		 * This can be overwridden with compiled templates from other template engines, such as Handlebars
+		 * @see https://github.com/jamesrr39/backbone-grid/blob/master/test/spec/OtherTemplateEngineTests.js
 		 * @param {object} data map of attributes to be used for building the row HTML
 		 * @param {array} columns array of fields. each element requires a <code>key</code>
 		 * @param {string} idAttribute the idAttribute as used by the Backbone Model. Added as an attribute (<code>data-id</code>) to the row <code>tr</code> element
