@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 			text: "libs/requirejs-text/text",
 			jquery: 'libs/jquery/dist/jquery',
 			underscore: "libs/underscore/underscore",
-			handlebars: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.amd.min",
+			handlebars: "libs/handlebars/handlebars",
 			test: "../test/",
 			backbone: "libs/backbone/backbone"
 		}
