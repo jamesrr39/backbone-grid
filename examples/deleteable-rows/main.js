@@ -1,6 +1,6 @@
 define([
 	"handlebars",
-	"../../src/BackboneGridView",
+	"BackboneGrid/BackboneGridView",
 	"text!./rowTemplate.html"
 ], function(Handlebars, BackboneGridView, rowTemplate){
 	"use strict";
