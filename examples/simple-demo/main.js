@@ -1,5 +1,5 @@
 define([
-	"../../src/BackboneGridView",
+	"BackboneGrid/BackboneGridView"
 ], function(BackboneGridView){
 	"use strict";
 
