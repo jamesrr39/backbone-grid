@@ -9,7 +9,9 @@ Playing around with using grunt/requirejs for testing.
 
 ## Usage
 
-Use it like a normal backbone view; pass it an element, a collection, and pass an array of columns. See the [examples](./examples) for getting started.
+Use it like a normal backbone view; pass it an element, a collection, and pass an array of columns.
+See the [Examples Wiki page](https://github.com/jamesrr39/backbone-grid/wiki/Examples) for examples and getting started.
+As it's an extension of a Backbone View, you can also use ```BackboneGridView.extend``` to extend it in a way that works for you.
 
 ## Build (pull in 3rd party resources via bower, run tests)
 
